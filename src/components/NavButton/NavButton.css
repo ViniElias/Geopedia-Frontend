@@ -1,7 +1,12 @@
 .navButton {
     font-size: 20px;
     text-decoration: none;
-    color: #333;
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 10px;
+    transition: 0.2s ease;
+}
+
+.navButton:hover {
+    background-color: rgb(32, 223, 108);
+    color: white;
 }
