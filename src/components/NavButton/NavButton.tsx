@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import './NavButton.css';
 
 interface NavButtonProps {
     name: string
@@ -7,7 +8,7 @@ interface NavButtonProps {
 
 const NavButton = ({ name, path }: NavButtonProps) => {
     return (
-        <NavLink to={path}>
+        <NavLink to={path} className="navButton">
             {name}
         </NavLink>
     )
