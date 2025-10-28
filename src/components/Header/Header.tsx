@@ -1,12 +1,16 @@
+import { Link } from "react-router-dom";
 import NavButton from "../NavButton/NavButton";
 import "./Header.css";
 
 const Header = () => {
     return (
         <div className="header">
-            <div className="logo">
-                GeoPedia
-            </div>
+            <Link to="/">
+                <div className="logo">
+                    GeoPedia
+                </div>
+            </Link>
+            
             <div className="navbar">
                 <NavButton name="Início" path="/" />
                 <NavButton name="Cidades" path="/cidades" />

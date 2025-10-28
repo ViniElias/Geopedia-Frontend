@@ -5,13 +5,14 @@
     margin: 0 auto;
     justify-content: space-between;
     padding: 10px;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid rgb(32, 223, 108);
 }
 
 .logo {
     padding: 5px;
     align-items: center;
     font-size: 30px;
+    text-decoration: none;
 }
 
 .navbar {
