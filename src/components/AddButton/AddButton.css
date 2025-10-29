@@ -1,0 +1,13 @@
+.add-button {
+    background-color: rgb(32, 223, 108);
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    color: rgba(246, 248, 247);
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.add-button:hover {
+    background-color: rgb(35, 241, 118)
+}

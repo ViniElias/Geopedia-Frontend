@@ -1,0 +1,15 @@
+.card-title {
+    font-size: 28px;
+}
+
+.card-content {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 6px 6px 8px rgba(32, 223, 108, 0.1);
+    transition: 0.2s ease;
+}
+
+.card-content:hover {
+    transform: scale(1.1);
+}

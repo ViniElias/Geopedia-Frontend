@@ -8,3 +8,63 @@
     padding: 0;
     text-decoration: none;
 }
+
+body {
+    background-color: rgba(246, 248, 247);
+}
+
+.title {
+    font-size: 50px;
+    text-align: center;
+    padding-top: 30px;
+    color: white;
+}
+
+.introduction {
+    margin: 15px auto;
+    text-align: center;
+    padding-bottom: 20px;
+    width: 80%;
+    color: white;
+}
+
+.main-content {
+    background-image: linear-gradient(rgba(17, 33, 23, 0.3) 0%, rgba(17, 33, 23, 0.6) 100%), url('../public/background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 20px;
+    width: 70%;
+    margin: 5% auto;
+    padding: 50px 30px;
+}
+
+.sub-content {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.sub-content h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.card-div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 30%));
+    margin: 40px auto;
+    width: 90%;
+    gap: 5%;
+}
+
+.top-content {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-content h1 {
+    font-size: 30px;
+}
