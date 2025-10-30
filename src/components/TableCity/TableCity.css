@@ -1,0 +1,21 @@
+.table {
+    margin-top: 40px;
+    border: 1px solid #50505070;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: justify;
+}
+
+.table-header {
+    height: 50px;
+    vertical-align: top;
+}
+
+.table-header th {
+    border-bottom: 1px solid #50505070;
+}
+
+.table-row {
+    height: 50px;
+    text-align: start;
+}

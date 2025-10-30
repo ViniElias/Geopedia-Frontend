@@ -8,6 +8,7 @@
     padding: 20px;
     box-shadow: 6px 6px 8px rgba(32, 223, 108, 0.1);
     transition: 0.2s ease;
+    min-height: 150px;
 }
 
 .card-content:hover {

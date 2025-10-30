@@ -2,6 +2,7 @@ import AddButton from "../components/AddButton/AddButton";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import SearchBar from "../components/SearchBar/SearchBar";
+import TableContinent from "../components/TableContinent/TableContinent";
 
 const Continentes = () => {
     return (
@@ -16,6 +17,7 @@ const Continentes = () => {
                 </div>
                 <div className="table-content">
                     <SearchBar />
+                    <TableContinent />
                 </div>
             </div>
             <div>
