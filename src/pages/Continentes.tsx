@@ -1,6 +1,7 @@
 import AddButton from "../components/AddButton/AddButton";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
+import SearchBar from "../components/SearchBar/SearchBar";
 
 const Continentes = () => {
     return (
@@ -12,6 +13,9 @@ const Continentes = () => {
                 <div className="top-content">
                     <h1>Continentes</h1>
                     <AddButton name="continente" />
+                </div>
+                <div className="table-content">
+                    <SearchBar />
                 </div>
             </div>
             <div>
