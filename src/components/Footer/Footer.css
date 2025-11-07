@@ -1,5 +1,6 @@
 .footer {
     width: 97%;
+    position: sticky;
     bottom: 0;
     left: 10px;
     padding: 15px;

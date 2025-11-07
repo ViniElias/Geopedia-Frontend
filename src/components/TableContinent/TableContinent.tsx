@@ -1,32 +1,45 @@
+import type { Continente } from "../../types";
 import "./TableContinent.css";
 
-const TableContinent = () => {
+interface TableContinentProps {
+    continentes: Continente[];
+    onEdit: (continente: Continente) => void;
+    onDelete: (id: number) => void;
+}
+
+const TableContinent: React.FC<TableContinentProps> = ({ continentes, onEdit, onDelete }) => {
     return (
         <table className="table">
             <tr className="table-header">
                 <th className="h1">Nome</th>
                 <th className="h2">Descrição</th>
+                <th className="h3">Ações</th>
             </tr>
-            <tr className="table-row">
-                <td>Europa</td>
-                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem commodi maxime distinctio voluptates mollitia veritatis cum facilis impedit aut iusto!</td>
-            </tr>
-            <tr className="table-row">
-                <td>Nova Iorque</td>
-                <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam et mollitia saepe at fugit dolorum ducimus error repudiandae non suscipit?</td>
-            </tr>
-            <tr className="table-row">
-                <td>Belo Horizonte</td>
-                <td>2.300.000</td>
-            </tr>
-            <tr className="table-row">
-                <td>Moscou</td>
-                <td>13.200.000</td>
-            </tr>
-            <tr className="table-row">
-                <td>Pequim</td>
-                <td>21.450.000</td>
-            </tr>
+
+            <tbody>
+                {continentes.length === 0 ? (
+                    <tr className="table-row">
+                        <td colSpan={3}>Nenhum continente cadastrado.</td>
+                    </tr>
+                ) : (
+                    continentes.map((continente) => (
+                        <tr className="table-row" key={continente.id}>
+                            <td>{continente.nome}</td>
+                            <td>{continente.descricao}</td>
+                            <td className="actions">
+                                <button className="icon-button edit-button"
+                                    onClick={() => onEdit(continente)}>
+                                    <i className="bi bi-pencil-fill"></i>
+                                </button>
+                                <button className="icon-button delete-button"
+                                    onClick={() => onDelete(continente.id)}>
+                                    <i className="bi bi-trash3-fill"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    ))
+                )}
+            </tbody>
         </table>
     )
 }
