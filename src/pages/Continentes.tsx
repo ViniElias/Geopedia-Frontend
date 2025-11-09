@@ -11,8 +11,12 @@ import type { Continente } from "../types";
 const Continentes = () => {
     const [isModalOpen, setIsmodalOpen] = useState(false);
     const [continentes, setContinentes] = useState<Continente[]>([]);
+    const [editingContinent, setEditingContinent] = useState<Continente | null>(null);
     const openModal = () => setIsmodalOpen(true);
-    const closeModal = () => setIsmodalOpen(false);
+    const closeModal = () => {
+        setIsmodalOpen(false);
+        setEditingContinent(null);
+    };
 
     // Busca os dados da API
     const fetchContinentes = async () => {
@@ -32,9 +36,19 @@ const Continentes = () => {
     }, []);
 
     const handleEdit = (continente: Continente) => {
-        console.log("Editar: ", continente);
+        setEditingContinent(continente);
         openModal();
     };
+
+    const handleAddClick = () => {
+        setEditingContinent(null);
+        openModal();
+    };
+
+    const handleSaveSuccess = () => {
+        fetchContinentes();
+        closeModal();
+    }
 
     const handleDelete = async (id: number) => {
         if (!window.confirm("Tem certeza que deseja excluir?")) {
@@ -60,7 +74,7 @@ const Continentes = () => {
             <div className="crud-content">
                 <div className="top-content">
                     <h1>Continentes</h1>
-                    <AddButton name="continente" onClick={openModal} />
+                    <AddButton name="continente" onClick={handleAddClick} />
                 </div>
                 <div className="table-content">
                     <SearchBar />
@@ -76,7 +90,7 @@ const Continentes = () => {
 
             {isModalOpen && (
                 <Modal onClose={closeModal}>
-                    <FormContinent onClose={closeModal} onSaveSuccess={fetchContinentes} />
+                    <FormContinent onClose={closeModal} onSaveSuccess={handleSaveSuccess} currentData={editingContinent} />
                 </Modal>
             )}
         </>
