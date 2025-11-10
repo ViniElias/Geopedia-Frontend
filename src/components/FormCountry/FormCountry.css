@@ -1,12 +1,10 @@
-/* (Adicione isso ao seu CSS de formulário) */
-
 .form-group select {
-    width: 100%; /* Ajuste para 100% se os inputs também forem */
+    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 18px;
-    background-color: white; /* Garante que o fundo seja branco */
+    background-color: white;
 }
 
 .form-group small {
