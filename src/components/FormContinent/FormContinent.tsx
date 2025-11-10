@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './FormContinent.css'
+import './FormContinent.css';
 import type { Continente } from '../../types';
 
 interface FormContinentProps {
@@ -69,7 +69,7 @@ const FormContinent: React.FC<FormContinentProps> = ({ onClose, onSaveSuccess, c
 
             <div className="form-group">
                 <label htmlFor="descricao">Descrição</label>
-                <textarea id="descricao" name="descricao" rows={4} value={descricao} required
+                <textarea id="descricao" name="descricao" rows={4} value={descricao}
                     onChange={(e) => setDescricao(e.target.value)} />
             </div>
 

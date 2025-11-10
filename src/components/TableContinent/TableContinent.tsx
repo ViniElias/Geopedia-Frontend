@@ -1,18 +1,47 @@
-import type { Continente } from "../../types";
+import type { Continente, SortKeyContinente, SortDirection } from "../../types";
 import "./TableContinent.css";
 
 interface TableContinentProps {
     continentes: Continente[];
     onEdit: (continente: Continente) => void;
     onDelete: (id: number) => void;
-}
+    onSort: (key: SortKeyContinente) => void;
+    sortKey: SortKeyContinente;
+    sortDirection: SortDirection;
+};
 
-const TableContinent: React.FC<TableContinentProps> = ({ continentes, onEdit, onDelete }) => {
+const TableContinent: React.FC<TableContinentProps> = ({
+    continentes,
+    onEdit,
+    onDelete,
+    onSort,
+    sortKey,
+    sortDirection
+}) => {
+
+    const SortArrow = ({ direction }: { direction: SortDirection }) => {
+        return (
+            <span className="sort-arrow">
+                {direction === 'asc' ? '🔼' : '🔽'}
+            </span>
+        );
+    };
+
     return (
         <table className="table">
             <tr className="table-header">
-                <th className="h1">Nome</th>
-                <th className="h2">Descrição</th>
+                <th className="h1">
+                    <button onClick={() => onSort('nome')}>
+                        Nome
+                        {sortKey === 'nome' && <SortArrow direction={sortDirection} />}
+                    </button>
+                </th>
+                <th className="h2">
+                    <button onClick={() => onSort('descricao')}>
+                        Descrição
+                        {sortKey === 'descricao' && <SortArrow direction={sortDirection} />}
+                    </button>
+                </th>
                 <th className="h3">Ações</th>
             </tr>
 

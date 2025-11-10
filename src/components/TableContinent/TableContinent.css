@@ -11,6 +11,22 @@
     text-align: center;
 }
 
+.table-header th button {
+    background: none;
+    border: none;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+    width: 100%;
+}
+
+.table-header th button:hover {
+    color: rgb(32, 223, 108);
+}
+
 .table-row td {
     padding: 15px 10px 15px 0;
     vertical-align: middle;
@@ -44,4 +60,9 @@
 
 .delete-button i {
     color: #dc3545;
+}
+
+.sort-arrow {
+    font-size: 0.8em;
+    margin-left: 5px;
 }

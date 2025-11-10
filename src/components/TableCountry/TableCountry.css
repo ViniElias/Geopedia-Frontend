@@ -1,0 +1,68 @@
+.h1 {
+    width: 35% !important;
+}
+
+.h2, .h3, .h4 {
+    width: 15% !important;
+}
+
+.h5 {
+    width: 10%;
+    text-align: center;
+}
+
+.table-header th button {
+    background: none;
+    border: none;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+    width: 100%;
+}
+
+.table-header th button:hover {
+    color: rgb(32, 223, 108);
+}
+
+.table-row td {
+    padding: 15px 10px 15px 0;
+    vertical-align: middle;
+}
+
+.actions {
+    text-align: center !important;
+    display: flex !important;
+    justify-content: center !important;  
+    align-items: center !important;
+    gap: 15px !important;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    padding: 5px;
+    border-radius: 50%;
+    transition: 0.2s ease;
+}
+
+.icon-button:hover {
+    transform: scale(1.2);
+}
+
+.edit-button i {
+    color: #2093ff;
+}
+
+.delete-button i {
+    color: #dc3545;
+}
+
+.sort-arrow {
+    font-size: 0.8em;
+    margin-left: 5px;
+}
