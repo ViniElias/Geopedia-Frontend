@@ -5,6 +5,7 @@ interface TableCityProps {
     cidades: Cidade[];
     onEdit: (cidade: Cidade) => void;
     onDelete: (id: number) => void;
+    onView: (cidade: Cidade) => void;
     onSort: (key: SortKeyCity) => void;
     sortKey: SortKeyCity;
     sortDirection: SortDirection;
@@ -14,6 +15,7 @@ const TableCity: React.FC<TableCityProps> = ({
     cidades,
     onEdit,
     onDelete,
+    onView,
     onSort,
     sortKey,
     sortDirection
@@ -72,6 +74,10 @@ const TableCity: React.FC<TableCityProps> = ({
                             <td>{cidade.latitude}</td>
                             <td>{cidade.longitude}</td>
                             <td className="actions">
+                                <button className="icon-button view-button"
+                                    onClick={() => onView(cidade)}>
+                                    <i className="bi bi-eye-fill"></i>
+                                </button>
                                 <button className="icon-button edit-button"
                                     onClick={() => onEdit(cidade)}>
                                     <i className="bi bi-pencil-fill"></i>

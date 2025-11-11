@@ -1,0 +1,112 @@
+@keyframes slideInFromRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.side-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.side-modal-content {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 450px; 
+  max-width: 90%;
+  background-color: white;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  cursor: default;
+  padding: 25px 35px;
+  overflow-y: auto;
+  animation: slideInFromRight 0.3s ease-out forwards;
+}
+
+.side-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  background: none;
+  border: none;
+  font-size: 36px;
+  color: #888;
+  cursor: pointer;
+  line-height: 1;
+}
+.side-modal-close:hover {
+  color: #333;
+}
+
+.side-modal-content h2 {
+  font-size: 32px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid rgb(32, 223, 108);
+  padding-bottom: 10px;
+}
+
+.details-section {
+  margin-bottom: 25px;
+}
+.details-section h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 15px;
+}
+.details-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+.details-section li {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.details-section li strong {
+  font-weight: 600;
+  color: #333;
+}
+
+.weather-card {
+  background-color: rgba(32, 223, 108, 0.815);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+.weather-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+.weather-temp {
+  font-size: 48px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+.weather-desc {
+  font-size: 20px;
+  color: #333;
+  text-transform: capitalize;
+  margin-top: -5px;
+  margin-bottom: 15px;
+}
+.weather-details {
+  display: flex;
+  justify-content: space-around;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.weather-card small {
+  font-size: 15px;
+  color: #333;
+}

@@ -7,10 +7,10 @@ export interface Continente {
 export interface Pais {
     id: number;
     nome: string;
-    populacao: number;
-    idioma: string;
-    moeda: string;
-    id_continente: number;
+    populacao: number | null;
+    idioma: string | null;
+    moeda: string | null;
+    id_continente: number | null;
 }
 
 export interface Cidade {
@@ -20,6 +20,15 @@ export interface Cidade {
     latitude: number;
     longitude: number;
     id_pais: number;
+}
+
+export interface WeatherInfo {
+    icone: string;
+    clima: string;
+    temperatura: number;
+    umidade: number;
+    vento: number;
+    horario: string;
 }
 
 export type SortKeyContinente = 'nome' | 'descricao';

@@ -1,17 +1,21 @@
 import { useEffect, useMemo, useState } from "react";
-import AddButton from "../components/AddButton/AddButton";
+import Modal from "../components/Modal/Modal";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
+import FormCity from "../components/FormCity/FormCity";
+import AddButton from "../components/AddButton/AddButton";
 import SearchBar from "../components/SearchBar/SearchBar";
 import TableCity from "../components/TableCity/TableCity";
-import type { Cidade, SortDirection, SortKeyCity } from "../types";
-import Modal from "../components/Modal/Modal";
-import FormCity from "../components/FormCity/FormCity";
+import type { Cidade, SortDirection, SortKeyCity, Pais } from "../types";
+import CityDetails from "../components/CityDetails/CityDetails";
 
 const Cidades = () => {
     const [isModalOpen, setIsmodalOpen] = useState(false);
+    const [detailsModal, setDetailsModal] = useState(false);
     const [cidades, setCidades] = useState<Cidade[]>([]);
+    const [paises, setPaises] = useState<Pais[]>([]);
     const [editingCity, setEditingCity] = useState<Cidade | null>(null);
+    const [viewingCity, setViewingCity] = useState<Cidade | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [sortKey, setSortKey] = useState<SortKeyCity>('nome');
     const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
@@ -32,8 +36,19 @@ const Cidades = () => {
         }
     };
 
+    const fetchPaises = async () => {
+        try {
+            const response = await fetch('http://localhost:3001/paises');
+            const data = await response.json();
+            setPaises(data);
+        } catch (error) {
+            console.error("Erro ao buscar países: ", error);
+        }
+    };
+
     useEffect(() => {
         fetchCidades();
+        fetchPaises();
     }, []);
 
     const handleEdit = (cidade: Cidade) => {
@@ -104,6 +119,16 @@ const Cidades = () => {
         }
     };
 
+    const openDetailsModal = (cidade: Cidade) => {
+        setViewingCity(cidade);
+        setDetailsModal(true);
+    };
+
+    const closeDetailsModal = () => {
+        setDetailsModal(false);
+        setViewingCity(null);
+    };
+
     return (
         <>
             <div>
@@ -122,6 +147,7 @@ const Cidades = () => {
                         cidades={processedCidades}
                         onEdit={handleEdit}
                         onDelete={handleDelete}
+                        onView={openDetailsModal}
                         onSort={handleSort}
                         sortKey={sortKey}
                         sortDirection={sortDirection} />
@@ -133,8 +159,20 @@ const Cidades = () => {
 
             {isModalOpen && (
                 <Modal onClose={closeModal}>
-                    <FormCity onClose={closeModal} onSaveSuccess={handleSaveSuccess} currentData={editingCity} />
+                    <FormCity
+                        onClose={closeModal}
+                        onSaveSuccess={handleSaveSuccess}
+                        currentData={editingCity}
+                        paises={paises} />
                 </Modal>
+            )}
+
+            {detailsModal && viewingCity && (
+                <CityDetails
+                    cidade={viewingCity}
+                    onClose={closeDetailsModal}
+                    paises={paises}
+                />
             )}
         </>
     )

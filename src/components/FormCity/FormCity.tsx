@@ -5,39 +5,24 @@ interface FormCityProps {
     onClose: () => void;
     onSaveSuccess: () => void;
     currentData: Cidade | null;
+    paises: Pais[];
 }
 
-const FormCity: React.FC<FormCityProps> = ({ onClose, onSaveSuccess, currentData }) => {
+const FormCity: React.FC<FormCityProps> = ({ onClose, onSaveSuccess, currentData, paises }) => {
     const [nome, setNome] = useState('');
     const [populacao, setPopulacao] = useState('');
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
     const [idPais, setIdPais] = useState('');
-    const [paises, setPaises] = useState<Pais[]>([]);
     const [error, setError] = useState<string | null>(null);
     const isEditing = currentData !== null;
-
-    useEffect(() => {
-        const fetchPaises = async () => {
-            try {
-                const response = await fetch('http://localhost:3001/paises');
-                const data = await response.json();
-                setPaises(data);
-            } catch (error) {
-                console.error("Erro ao buscar países: ", error);
-                setError("Não foi possível carregar a lista de países.");
-            }
-        };
-
-        fetchPaises();
-    }, []);
 
     useEffect(() => {
         if (isEditing && currentData) {
             setNome(currentData.nome);
             setPopulacao(String(currentData.populacao || ''));
-            setLatitude(String(currentData.latitude || null));
-            setLongitude(String(currentData.longitude || null));
+            setLatitude(String(currentData.latitude || ''));
+            setLongitude(String(currentData.longitude || ''));
             setIdPais(String(currentData.id_pais || ''));
         } else {
             setNome('');
@@ -58,18 +43,22 @@ const FormCity: React.FC<FormCityProps> = ({ onClose, onSaveSuccess, currentData
 
         const method = isEditing ? 'PUT' : 'POST';
 
-        let payload: any = {
-            nome: nome,
-            populacao: populacao ? Number(populacao) : null,
-            id_pais: Number(idPais)
-        };
+        let payload;
 
         if (isEditing) {
             payload = {
-                ...payload,
-                latitude: latitude,
-                longitude: longitude
+                nome: nome,
+                populacao: populacao,
+                latitude: latitude || null,
+                longitude: longitude || null,
+                id_pais: idPais
             };
+        } else {
+            payload = {
+                nome: nome,
+                populacao,
+                id_pais: idPais
+            }
         }
 
         try {
@@ -129,13 +118,13 @@ const FormCity: React.FC<FormCityProps> = ({ onClose, onSaveSuccess, currentData
                 <>
                     <div className="form-group">
                         <label htmlFor="latitude">Latitude</label>
-                        <input type="text" id="latitude" name="latitude" value={latitude}
+                        <input type="number" id="latitude" name="latitude" value={latitude}
                             onChange={(e) => setLatitude(e.target.value)} />
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="longitude">Longitude</label>
-                        <input type="text" id="longitude" name="longitude" value={longitude}
+                        <input type="number" id="longitude" name="longitude" value={longitude}
                             onChange={(e) => setLongitude(e.target.value)} />
                     </div>
                 </>
