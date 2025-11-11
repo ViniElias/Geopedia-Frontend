@@ -1,4 +1,5 @@
 import "./TableCountry.css";
+import { traduzir } from "../../utils/translations";
 import type { Pais, SortKeyCountry, SortDirection } from "../../types";
 
 interface TableCountryProps {
@@ -67,8 +68,8 @@ const TableCountry: React.FC<TableCountryProps> = ({
                         <tr className="table-row" key={pais.id}>
                             <td>{pais.nome}</td>
                             <td>{pais.populacao}</td>
-                            <td>{pais.idioma}</td>
-                            <td>{pais.moeda}</td>
+                            <td>{traduzir(pais.idioma)}</td>
+                            <td>{traduzir(pais.moeda)}</td>
                             <td className="actions">
                                 <button className="icon-button edit-button"
                                     onClick={() => onEdit(pais)}>
