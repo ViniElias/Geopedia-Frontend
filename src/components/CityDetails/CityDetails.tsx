@@ -53,9 +53,9 @@ const CityDetails: React.FC<CityDetailsProps> = ({ cidade, onClose, paises }) =>
                 <div className="details-section">
                     <h3>Informações</h3>
                     <ul>
-                        <li><strong>População:</strong> {cidade.populacao}</li>
-                        <li><strong>Latitude:</strong> {cidade.latitude}</li>
-                        <li><strong>Longitude:</strong> {cidade.longitude}</li>
+                        <li><strong>População:</strong> {cidade.populacao} pessoas</li>
+                        <li><strong>Latitude:</strong> {cidade.latitude}°</li>
+                        <li><strong>Longitude:</strong> {cidade.longitude}°</li>
                         <li><strong>País:</strong> {paisNome || 'N/D'}</li>
                     </ul>
                 </div>

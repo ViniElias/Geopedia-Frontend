@@ -6,6 +6,7 @@ interface TableCountryProps {
     paises: Pais[];
     onEdit: (pais: Pais) => void;
     onDelete: (id: number) => void;
+    onView: (pais: Pais) => void;
     onSort: (key: SortKeyCountry) => void;
     sortKey: SortKeyCountry;
     sortDirection: SortDirection;
@@ -15,6 +16,7 @@ const TableCountry: React.FC<TableCountryProps> = ({
     paises,
     onEdit,
     onDelete,
+    onView,
     onSort,
     sortKey,
     sortDirection
@@ -71,6 +73,10 @@ const TableCountry: React.FC<TableCountryProps> = ({
                             <td>{traduzir(pais.idioma)}</td>
                             <td>{traduzir(pais.moeda)}</td>
                             <td className="actions">
+                                <button className="icon-button view-button"
+                                    onClick={() => onView(pais)}>
+                                    <i className="bi bi-eye-fill"></i>
+                                </button>
                                 <button className="icon-button edit-button"
                                     onClick={() => onEdit(pais)}>
                                     <i className="bi bi-pencil-fill"></i>
