@@ -7,6 +7,7 @@ const Header = () => {
         <div className="header">
             <Link to="/">
                 <div className="logo">
+                    <img src="./public/logo.png" alt="Logo Geopedia"/>
                     Geopedia
                 </div>
             </Link>
