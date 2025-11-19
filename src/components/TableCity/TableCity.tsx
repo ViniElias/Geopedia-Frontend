@@ -1,8 +1,9 @@
 import "./TableCity.css";
-import type { Cidade, SortKeyCity, SortDirection } from "../../types";
+import type { Cidade, SortKeyCity, SortDirection, Pais } from "../../types";
 
 interface TableCityProps {
     cidades: Cidade[];
+    paises: Pais[];
     onEdit: (cidade: Cidade) => void;
     onDelete: (id: number) => void;
     onView: (cidade: Cidade) => void;
@@ -13,6 +14,7 @@ interface TableCityProps {
 
 const TableCity: React.FC<TableCityProps> = ({
     cidades,
+    paises,
     onEdit,
     onDelete,
     onView,
@@ -57,38 +59,46 @@ const TableCity: React.FC<TableCityProps> = ({
                             {sortKey === 'longitude' && <SortArrow direction={sortDirection} />}
                         </button>
                     </th>
-                    <th className="h5">Ações</th>
+                    <th className="h5">País</th>
+                    <th className="h6">Ações</th>
                 </tr>
             </thead>
 
             <tbody>
                 {cidades.length === 0 ? (
                     <tr className="table-row">
-                        <td colSpan={5}>Nenhuma cidade cadastrada.</td>
+                        <td colSpan={6}>Nenhuma cidade cadastrada.</td>
                     </tr>
                 ) : (
-                    cidades.map((cidade) => (
-                        <tr className="table-row" key={cidade.id}>
-                            <td>{cidade.nome}</td>
-                            <td>{cidade.populacao}</td>
-                            <td>{cidade.latitude}</td>
-                            <td>{cidade.longitude}</td>
-                            <td className="actions">
-                                <button className="icon-button view-button"
-                                    onClick={() => onView(cidade)}>
-                                    <i className="bi bi-eye-fill"></i>
-                                </button>
-                                <button className="icon-button edit-button"
-                                    onClick={() => onEdit(cidade)}>
-                                    <i className="bi bi-pencil-fill"></i>
-                                </button>
-                                <button className="icon-button delete-button"
-                                    onClick={() => onDelete(cidade.id)}>
-                                    <i className="bi bi-trash3-fill"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    ))
+                    cidades.map((cidade) => {
+                        const paisNome = paises.find(
+                            p => p.id === cidade.id_pais
+                        )?.nome;
+
+                        return (
+                            <tr className="table-row" key={cidade.id}>
+                                <td>{cidade.nome}</td>
+                                <td>{cidade.populacao}</td>
+                                <td>{cidade.latitude}°</td>
+                                <td>{cidade.longitude}°</td>
+                                <td>{paisNome || 'N/D'}</td>
+                                <td className="actions">
+                                    <button className="icon-button view-button"
+                                        onClick={() => onView(cidade)}>
+                                        <i className="bi bi-eye-fill"></i>
+                                    </button>
+                                    <button className="icon-button edit-button"
+                                        onClick={() => onEdit(cidade)}>
+                                        <i className="bi bi-pencil-fill"></i>
+                                    </button>
+                                    <button className="icon-button delete-button"
+                                        onClick={() => onDelete(cidade.id)}>
+                                        <i className="bi bi-trash3-fill"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        )
+                    })
                 )}
             </tbody>
         </table>

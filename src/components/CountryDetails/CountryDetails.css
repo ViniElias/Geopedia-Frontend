@@ -102,3 +102,29 @@
     color: #666;
     font-style: italic;
 }
+
+@media (max-width: 600px) {
+    .side-modal-content {
+        width: 80%;
+        padding: 20px;
+    }
+
+    .details-section li {
+        font-size: 16px;
+    }
+
+    .weather-temp {
+        font-size: 36px;
+    }
+
+    .weather-card {
+        width: 80%;
+    }
+    
+    .weather-card * {
+        font-size: 20px;
+    }
+    .side-modal-content h2 {
+        font-size: 24px;
+    }
+}

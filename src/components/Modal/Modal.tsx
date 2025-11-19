@@ -8,7 +8,6 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({onClose, children}) => {
     return (
         <div className="modal-overlay" onClick={onClose}>
-            {/* stopPropagation() para impedir que o clique dentro do modal seja propagado para o overlay e o feche acidentalmente. */}
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <button className="modal-close" onClick={onClose}>
                     &times;

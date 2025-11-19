@@ -32,3 +32,16 @@
     transform: scale(1.2);
     color: rgb(32, 223, 108);
 }
+
+@media (max-width: 768px) {
+    p {
+        font-size: 18px;
+    }
+
+    .footer-icons {
+        flex-wrap: wrap;
+    }
+    .footer-icons i {
+        font-size: 28px;
+    }
+}

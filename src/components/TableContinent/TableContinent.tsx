@@ -30,19 +30,19 @@ const TableContinent: React.FC<TableContinentProps> = ({
     return (
         <table className="table">
             <tr className="table-header">
-                <th className="h1">
+                <th className="continent-h1">
                     <button onClick={() => onSort('nome')}>
                         Nome
                         {sortKey === 'nome' && <SortArrow direction={sortDirection} />}
                     </button>
                 </th>
-                <th className="h2">
+                <th className="continent-h2">
                     <button onClick={() => onSort('descricao')}>
                         Descrição
                         {sortKey === 'descricao' && <SortArrow direction={sortDirection} />}
                     </button>
                 </th>
-                <th className="h3">Ações</th>
+                <th className="continent-h3">Ações</th>
             </tr>
 
             <tbody>

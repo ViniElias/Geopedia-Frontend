@@ -1,13 +1,16 @@
-.h1 {
-    width: 35% !important;
+.country-h1 {
+    width: 35%;
 }
 
-.h2, .h3, .h4 {
-    width: 15% !important;
-}
-
-.h5 {
+.country-h2, .country-h6 {
     width: 10%;
+}
+
+.country-h3, .country-h4, .country-h5 {
+    width: 15%;
+}
+
+.country-h6 {
     text-align: center;
 }
 
@@ -33,11 +36,11 @@
 }
 
 .actions {
-    text-align: center !important;
-    display: flex !important;
-    justify-content: center !important;  
-    align-items: center !important;
-    gap: 15px !important;
+    text-align: center;
+    display: flex;
+    justify-content: center;  
+    align-items: center;
+    gap: 15px;
 }
 
 .icon-button {
@@ -65,4 +68,31 @@
 .sort-arrow {
     font-size: 0.8em;
     margin-left: 5px;
+}
+
+/* --- Responsividade da Tabela --- */
+
+@media (max-width: 768px) {
+    .table {
+        min-width: 600px; /* Força uma largura mínima para ativar o scroll */
+        font-size: 14px; /* Fonte menor */
+    }
+
+    .table-header {
+        height: 40px;
+    }
+
+    .table-row td {
+        padding: 10px 5px;
+    }
+
+    /* Ícones menores para economizar espaço */
+    .icon-button {
+        font-size: 18px;
+        padding: 2px;
+    }
+    
+    .actions {
+        gap: 5px !important;
+    }
 }

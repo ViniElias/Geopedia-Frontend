@@ -29,3 +29,17 @@
     gap: 25px;
     align-items: center;
 }
+
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .navbar {
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}

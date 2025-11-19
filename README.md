@@ -1,73 +1,133 @@
-# React + TypeScript + Vite
+# 🌍 Geopedia
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Geopedia** é uma aplicação Full Stack desenvolvida para o gerenciamento e exploração de dados geográficos. O projeto permite o cadastro, edição, exclusão e visualização de **Continentes**, **Países** e **Cidades**, integrando-se a APIs externas para enriquecer a experiência do usuário com dados em tempo real.
 
-Currently, two official plugins are available:
+## 🚀 Sobre o Projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+O sistema foi construído com foco em performance e usabilidade, utilizando **React** com TypeScript no front-end e **Node.js/Express** no back-end, com persistência de dados em **PostgreSQL**.
 
-## React Compiler
+A aplicação não se limita a um CRUD básico; ela enriquece os dados locais consumindo serviços externos para buscar bandeiras, informações demográficas e dados climáticos em tempo real.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Funcionalidades Principais
 
-## Expanding the ESLint configuration
+* **CRUD Completo:** Gerenciamento de Continentes, Países e Cidades com relacionamentos no banco de dados.
+* **Integração com APIs Externas:**
+    * **REST Countries:** Busca automática de bandeiras e preenchimento de dados (população, idioma, moeda) ao cadastrar países.
+    * **OpenWeatherMap:** Busca automática de coordenadas (latitude/longitude) e exibição do **clima em tempo real** (temperatura, umidade, vento) para as cidades.
+* **Interface Rica:**
+    * **Tabelas Dinâmicas:** Com suporte a ordenação por colunas e filtros de pesquisa (texto e por entidade pai).
+    * **Paginação:** Implementação robusta para lidar com grandes volumes de dados.
+    * **Modais Interativos:** Formulários e painéis laterais de detalhes com animações suaves.
+* **Responsividade:** Layout adaptável para desktops, tablets e dispositivos móveis.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tecnologias Utilizadas
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Front-end
+* React (Vite)
+* TypeScript
+* CSS3 (com animações e variáveis)
+* Bootstrap Icons
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Back-end
+* Node.js
+* Express
+* TypeScript
+* pg (node-postgres)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Banco de Dados
+* PostgreSQL
+
+## 🔌 APIs Externas
+* [REST Countries](https://restcountries.com/)
+* [OpenWeatherMap](https://openweathermap.org/)
+
+---
+
+## 🚀 Como Executar o Projeto
+
+### 📦 Pré-requisitos
+
+Antes de começar, você precisará ter as seguintes ferramentas instaladas em sua máquina:
+
+* **[Node.js](https://nodejs.org/)** (Versão 18 ou superior recomendada)
+* **[PostgreSQL](https://www.postgresql.org/)** (Para o banco de dados)
+* **[Git](https://git-scm.com/)** (Para clonar o repositório)
+* Um editor de código, como o **[VSCode](https://code.visualstudio.com/)**
+
+---
+
+### 🎲 Rodando a Aplicação
+
+Siga o passo a passo abaixo para configurar o ambiente localmente.
+
+#### 1. Clone os Repositórios
+
+Abra o seu terminal e execute:
+
+```bash
+git clone https://github.com/ViniElias/Geopedia-Frontend
+git clone https://github.com/ViniElias/Geopedia-Backend
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Abra-os em terminais separados:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd Geopedia-Frontend
+cd Geopedia-Backend
 ```
+
+#### 2. Configurando as Variáveis de Ambiente
+
+No backend, crie o arquivo de variáveis de ambiente:
+
+```bash
+cp .env.template .env
+```
+
+E substitua os valores genéricos no **.env** com seu **Nome de usuário e senha do PostgreSQL** (definidos na instalação) e **Chave da API.**
+**Observação:** O usuário padrão de instalação é "postgres".
+
+#### 3. Configurando o Banco de Dados
+
+Certifique-se de que seu serviço PostgreSQL esteja em execução. Após isso, acesse seu terminal:
+
+```bash
+psql -U postgres
+```
+
+Crie o banco:
+```sql
+CREATE DATABASE geopedia;
+```
+
+Saia do psql:
+```sql
+\q
+```
+
+Acesse a pasta do Backend:
+```bash
+cd Geopedia-Backend/
+```
+
+Execute o comando de inicialização das tabelas:
+```bash
+psql -U postgres -d geopedia -f init.sql
+```
+
+Caso desejar, pode fechar esse terminal.
+
+#### 4. Instalando Dependências
+
+Tanto no Front quanto no Back, execute:
+```sh
+npm install
+```
+
+Execute com:
+
+```sh
+npm run dev
+```
+
+Acesse no navegador em **http://localhost:5173/**

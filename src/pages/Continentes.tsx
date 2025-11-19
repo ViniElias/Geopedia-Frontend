@@ -33,8 +33,6 @@ const Continentes = () => {
         }
     };
 
-    // useEffect chama a função quando a página carrega
-    // Lista vazia [] significa para executar apenas uma vez, quando montar
     useEffect(() => {
         fetchContinentes();
     }, []);

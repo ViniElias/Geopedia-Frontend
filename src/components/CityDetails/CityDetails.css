@@ -110,3 +110,19 @@
   font-size: 15px;
   color: #333;
 }
+
+@media (max-width: 600px) {
+    .side-modal-content {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .weather-temp {
+        font-size: 36px;
+    }
+    
+    .side-modal-content h2 {
+        font-size: 24px;
+    }
+}

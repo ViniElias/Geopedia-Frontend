@@ -10,15 +10,22 @@ import type { Cidade, SortDirection, SortKeyCity, Pais } from "../types";
 import CityDetails from "../components/CityDetails/CityDetails";
 
 const Cidades = () => {
-    const [isModalOpen, setIsmodalOpen] = useState(false);
-    const [detailsModal, setDetailsModal] = useState(false);
     const [cidades, setCidades] = useState<Cidade[]>([]);
     const [paises, setPaises] = useState<Pais[]>([]);
+
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedCountry, setSelectedCountry] = useState<string>('');
+
+    const [isModalOpen, setIsmodalOpen] = useState(false);
+    const [detailsModal, setDetailsModal] = useState(false);
     const [editingCity, setEditingCity] = useState<Cidade | null>(null);
     const [viewingCity, setViewingCity] = useState<Cidade | null>(null);
-    const [searchTerm, setSearchTerm] = useState('');
+
     const [sortKey, setSortKey] = useState<SortKeyCity>('nome');
     const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
     const openModal = () => setIsmodalOpen(true);
     const closeModal = () => {
@@ -28,9 +35,15 @@ const Cidades = () => {
 
     const fetchCidades = async () => {
         try {
-            const response = await fetch('http://localhost:3001/cidades');
+            const response = await fetch('http://localhost:3001/cidades?limit=10000');
             const data = await response.json();
-            setCidades(data);
+
+            if (data.data) {
+                setCidades(data.data);
+            } else {
+                setCidades(data);
+            }
+
         } catch (error) {
             console.error("Erro ao buscar cidades", error);
         }
@@ -38,9 +51,14 @@ const Cidades = () => {
 
     const fetchPaises = async () => {
         try {
-            const response = await fetch('http://localhost:3001/paises');
+            const response = await fetch('http://localhost:3001/paises?limit=1000');
             const data = await response.json();
-            setPaises(data);
+
+            if (data.data) {
+                setPaises(data.data);
+            } else {
+                setPaises(data);
+            }
         } catch (error) {
             console.error("Erro ao buscar países: ", error);
         }
@@ -50,6 +68,18 @@ const Cidades = () => {
         fetchCidades();
         fetchPaises();
     }, []);
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(prev => prev + 1);
+        }
+    };
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(prev => prev - 1);
+        }
+    };
 
     const handleEdit = (cidade: Cidade) => {
         setEditingCity(cidade);
@@ -72,23 +102,25 @@ const Cidades = () => {
         }
 
         try {
-            await fetch(`http://localhost:3001/cidades/${id}`, {
-                method: 'DELETE',
-            });
-
-            fetchCidades();
+            await fetch(`http://localhost:3001/cidades/${id}`, { method: 'DELETE' });
+            setCidades(prev => prev.filter(c => c.id !== id));
         } catch (error) {
             console.error("Erro ao excluir cidade: ", error);
         }
     };
 
     const processedCidades = useMemo(() => {
-        const filtered = cidades.filter(cidade =>
+        let result = cidades.filter(cidade =>
             cidade.nome.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
-        const sorted = [...filtered];
-        sorted.sort((a, b) => {
+        if (selectedCountry) {
+            result = result.filter(cidade =>
+                cidade.id_pais === Number(selectedCountry)
+            );
+        }
+
+        result.sort((a, b) => {
             const valA = a[sortKey] || '';
             const valB = b[sortKey] || '';
 
@@ -107,8 +139,20 @@ const Cidades = () => {
             return sortDirection === 'asc' ? comparison : -comparison;
         });
 
-        return sorted;
-    }, [cidades, searchTerm, sortKey, sortDirection]);
+        return result;
+    }, [cidades, searchTerm, sortKey, sortDirection, selectedCountry]);
+
+    const totalPages = Math.ceil(processedCidades.length / itemsPerPage);
+
+    const currentTableData = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * itemsPerPage;
+        const lastPageIndex =  firstPageIndex + itemsPerPage;
+        return processedCidades.slice(firstPageIndex, lastPageIndex);
+    }, [currentPage, processedCidades]);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm, selectedCountry]);
 
     const handleSort = (key: SortKeyCity) => {
         if (sortKey === key) {
@@ -140,17 +184,54 @@ const Cidades = () => {
                     <AddButton name="cidade" onClick={handleAddClick} />
                 </div>
                 <div className="table-content">
-                    <SearchBar
-                        placeholder="Digite o nome de uma cidade"
-                        onSearch={setSearchTerm} />
+                    <div className="filter-container">
+                        <SearchBar
+                            placeholder="Digite o nome de uma cidade"
+                            onSearch={setSearchTerm} />
+
+                        <select
+                            id="pais-filter"
+                            value={selectedCountry}
+                            onChange={(e) => setSelectedCountry(e.target.value)}
+                        >
+                            <option value="">País</option>
+                            {paises.map(p => (
+                                <option key={p.id} value={p.id}>
+                                    {p.nome}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
                     <TableCity
-                        cidades={processedCidades}
+                        cidades={currentTableData}
+                        paises={paises}
                         onEdit={handleEdit}
                         onDelete={handleDelete}
                         onView={openDetailsModal}
                         onSort={handleSort}
                         sortKey={sortKey}
                         sortDirection={sortDirection} />
+
+                    <div className="pagination-controls">
+                        <button
+                            onClick={handlePrevPage}
+                            disabled={currentPage === 1}
+                            className="pagination-button"
+                        >
+                            Anterior
+                        </button>
+
+                        <span>Página {currentPage} de {totalPages}</span>
+
+                        <button
+                            onClick={handleNextPage}
+                            disabled={currentPage === totalPages}
+                            className="pagination-button"
+                        >
+                            Próximo
+                        </button>
+                    </div>
                 </div>
             </div>
             <div>

@@ -70,3 +70,27 @@
 #descricao {
     resize: none;
 }
+
+@media (max-width: 768px) {
+
+    h2,
+    label {
+        font-size: 20px !important;
+    }
+
+    .modal-form {
+        width: 100% !important;
+        max-width: none;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 88%;
+    }
+
+    .form-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
